@@ -1,56 +1,51 @@
-doctype html
-html
-    head
-        title Jade Playground
-    body
-        - var myTitle2 = 'Hi, Everyone!'
-        - var mySkills = ['C#', 'MySQL', 'Python']
-        if myTitle
-            h1 #{myTitle}
-            p(class='myClass', id='myId') This is a paragraph, as well!
-        else
-            h1 Awwh, we have no title!
-        
-        ul
-            each val in mySkills
-                li= val
+extends ../layout/layout.jade
+include ../includes/mixins.jade
+
+block headContent
+    title Jade Playground
+
+block bodyContent
+    - var myTitle = 'Hi, Everyone!'
+    - var mySkills = ['C#', 'MySQL', 'Python']
+    if myTitle
+        h1 #{myTitle}
+        p(class='myClass', id='myId') This is a paragraph, as well!
+    else
+        h1 Awwh, we have no title!
+    
+    ul
+        each val in mySkills
+            li= val
 
 
-        div.myDivClass.my2ndDivClass#myDivId This is a Div!!
+    div.myDivClass.my2ndDivClass#myDivId This is a Div!!
 
-        div(style={color:'red', background: 'black'})
+    div(style={color:'red', background: 'black'})
 
-        mixin paragraph
-            p Hello!!
-        +paragraph
+    mixin paragraph
+        p Hello!!
+    +paragraph
 
-        mixin paragraph2(myContent, id)
-            p(id=id)=myContent
-        +paragraph2('Teste MIXIN!!!!!', 'myParaId')
-
-
+    mixin paragraph2(myContent, id)
+        p(id=id)=myContent
+    +paragraph2('Teste MIXIN!!!!!', 'myParaId')
 
 
-        form(active='', method='POST')
-            mixin formTest(textId, textValue)
-                tr
-                    td
-                        label(for=textId)=textValue
-                    td
-                        input(name=textId, id=textId type='text')
 
-            table
-                +formTest('firstName', 'First Name:')
 
-                +formTest('lastName', 'Last Name:')
+    form(active='', method='POST')        
+        table
+            +formTest('firstName', 'First Name:')
 
-                tr
-                    td
-                        label(for='myList') Occupation:
-                    td 
-                        select(name='myList', id='myList')
-                            option(value='designer') Designer
-                            option(value='coder') Coder
-                tr
-                    td(colspan='2', text-aling='center')
-                        input(type='button', value='Submit')
+            +formTest('lastName', 'Last Name:')
+
+            tr
+                td
+                    label(for='myList') Occupation:
+                td 
+                    select(name='myList', id='myList')
+                        option(value='designer') Designer
+                        option(value='coder') Coder
+            tr
+                td(colspan='2', text-aling='center')
+                    input(type='button', value='Submit')
